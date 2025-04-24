@@ -22,7 +22,7 @@ public class ToExplore extends MainMethods {
             System.out.println("Testing 2 - Send Http POST request");
 
             Connection.Response response;
-            response = Jsoup.connect("https://10.200.2.237/login")
+            response = Jsoup.connect()
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36")
                     //.referrer("http://www.google.com")
                     .ignoreHttpErrors(true)
@@ -35,13 +35,13 @@ public class ToExplore extends MainMethods {
             System.out.println("JSESSIONID=" + response.cookies().get("sfs-core-services"));
 
 
-            response = Jsoup.connect("https://10.200.2.237/login")
+            response = Jsoup.connect("")
                     .ignoreHttpErrors(true)
                     .validateTLSCertificates(false)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36")
                     .referrer("http://www.google.com")
-                    .data("data[User][username]", "ikovtunov@kapitus.com")
-                    .data("data[User][password]", "Welcome123")
+                    .data("data[User][username]", "")
+                    .data("data[User][password]", "")
                     .timeout(30000)
                     .cookies(response.cookies())
                     .method(Connection.Method.POST)
@@ -49,7 +49,7 @@ public class ToExplore extends MainMethods {
 
             System.out.println(response.statusCode());
             System.out.println(response.statusMessage());
-            System.out.println("JSESSIONID=" + response.cookies().get("sfs-core-services"));
+            System.out.println("JSESSIONID=" + response.cookies().get(""));
 
 
             Map<String, String> cookies = response.cookies();
@@ -60,7 +60,7 @@ public class ToExplore extends MainMethods {
                 System.out.println("j    " + key + "    l    ");
             }
 
-            response = Jsoup.connect("https://10.200.2.237/")
+            response = Jsoup.connect("")
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36")
                     //.referrer("http://www.google.com")
                     .ignoreHttpErrors(true)
@@ -70,18 +70,18 @@ public class ToExplore extends MainMethods {
             System.out.println(response.statusCode());
             System.out.println(response.statusMessage());
             coo = response.cookies().get("sfs-core-services");
-            System.out.println("JSESSIONID=" + response.cookies().get("sfs-core-services"));
+            System.out.println("JSESSIONID=" + response.cookies().get(""));
 
 
 //And this is the easieste way I've found to remain in session
-            Document doc = Jsoup.connect("https://10.200.2.237/merchants")
+            Document doc = Jsoup.connect("")
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36")
                     .ignoreHttpErrors(true)
                     .validateTLSCertificates(false)
                     //.cookies(cookies.get(""))
                     .get();
             System.out.println(doc);
-            cookie = response.cookies().get("sfs-core-services");
+            cookie = response.cookies().get("");
             System.out.println(cookie);
 
 
@@ -90,12 +90,12 @@ public class ToExplore extends MainMethods {
             e.printStackTrace();
         }
 
-        open("https://10.200.2.237/");
+        open("");
         System.out.println("authhh    " + cookie);
-        Cookie AUTH_COOKIE = new Cookie("sfs-core-services", cookie);
+        Cookie AUTH_COOKIE = new Cookie("", cookie);
         WebDriverRunner.getWebDriver().manage().addCookie(AUTH_COOKIE);
         System.out.println("authh sent");
-        open("https://10.200.2.237/merchants");
+        open("");
         refresh();
         System.out.println("refreshed");
         Thread.sleep(60000);
